@@ -6,11 +6,11 @@
 <title>Home</title>
 <link rel="stylesheet" href="../../css/bootstrap.min.css" >
 </head>
-<body>
+<body style="background-color: black">
 <div class="container">
 
 	<div class="row">
-		<h2>Add New Curve Point</h2>
+		<h2 style="color: white">Add New Curve Point</h2>
 	</div>
 
 	<div class="row">
@@ -18,6 +18,20 @@
 			<!--
 			TODO: Create a form to input the values of CurvePoint, there are 2 buttons: Save data and Cancel to the list CurvePoint
 			 -->
+			<div class="mb-3">
+				<label for="account" class="form-label" style="color: white">Curve Id</label>
+				<input type="text" name="account" class="form-control" id="account" placeholder="Curve Id">
+			</div>
+			<div class="mb-3">
+				<label for="type" class="form-label" style="color: white">Term</label>
+				<input type="text" name="type" class="form-control" id="type" placeholder="type">
+			</div>
+			<div class="mb-3">
+				<label for="bidQuantity" class="form-label" style="color: white">Value</label>
+				<input type="text" name="bidQuantity" class="form-control" id="bidQuantity" placeholder="Value">
+			</div>
+			<button type="button" class="btn btn-primary">Cancel</button>
+			<button type="submit" class="btn btn-primary">Add Curvepoint</button>
 
 		</form>
 	</div>

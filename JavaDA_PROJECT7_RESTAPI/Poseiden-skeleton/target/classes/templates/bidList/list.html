@@ -27,7 +27,7 @@
 	<div class="row">
 		<a href="/bidList/add" class="btn btn-primary btn-sm">Add New</a>
 		<table class="table table-bordered">
-			<thead>
+			<thead class="table-dark">
 				<tr>
 					<th>Id</th>
 					<th>Account</th>
@@ -38,6 +38,16 @@
 			</thead>
 			<tbody>
 				<!-- TODO: Show all Bids to the table, the Action column will have Edit & Delete buttons -->
+				<tr th:each="bidList : ${bidList}">
+					<td th:text="${bidList.bidListId}"></td>
+					<td th:text="${bidList.account}"></td>
+					<td th:text="${bidList.type}"></td>
+					<td th:text="${bidList.bidQuantity}"></td>
+					<td>
+						<button type="button" class="btn btn-primary">Cancel</button>
+						<button type="submit" class="btn btn-primary">Add Curvepoint</button>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
