@@ -17,6 +17,20 @@
 			<!--
 			TODO: Create a form to edit the values of CurvePoint, there are 2 buttons: Update data and Cancel to the Curve Point
 			 -->
+			<div class="mb-3">
+				<label for="account" class="form-label">Curve Id</label>
+				<input type="text" name="account" class="form-control" id="account" placeholder="Curve Id" th:value="${curvePoint.curveId}">
+			</div>
+			<div class="mb-3">
+				<label for="type" class="form-label">Term</label>
+				<input type="text" name="type" class="form-control" id="type" placeholder="type" th:value="${curvePoint.term}">
+			</div>
+			<div class="mb-3">
+				<label for="bidQuantity" class="form-label">Value</label>
+				<input type="text" name="bidQuantity" class="form-control" id="bidQuantity" placeholder="Value" th:value="${curvePoint.value}">
+			</div>
+			<button type="button" class="btn btn-primary">Cancel</button>
+			<button type="submit" class="btn btn-primary">Update Curvepoint</button>
 		</form>
 	</div>
 

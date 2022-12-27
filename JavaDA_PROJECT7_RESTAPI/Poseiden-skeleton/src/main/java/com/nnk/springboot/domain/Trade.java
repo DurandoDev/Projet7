@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 
@@ -16,16 +17,22 @@ public class Trade {
 	@Column(name = "trade_id", nullable = false)
 	private Integer tradeId;
 
+	@NotBlank(message = "Account is mandatory")
 	String account;
 
+	@NotBlank(message = "Type is mandatory")
 	String type;
 
+	@NotNull(message = "must not be null")
 	double buyQuantity;
 
+	@NotNull(message = "must not be null")
 	double sellQuantity;
 
+	@NotNull(message = "must not be null")
 	double buyPrice;
 
+	@NotNull(message = "must not be null")
 	double sellPrice;
 
 	Timestamp tradeDate;

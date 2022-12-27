@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Required;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -23,6 +25,7 @@ public class BidList {
 	@NotBlank(message = "Type is mandatory")
 	String type;
 
+	@NotNull(message = "must not be null")
 	double bidQuantity;
 
 	double askQuantity;

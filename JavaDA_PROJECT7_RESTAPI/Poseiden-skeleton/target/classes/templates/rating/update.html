@@ -18,9 +18,26 @@
 			<!--
 			TODO: Create a form to edit the values of Rating, there are 2 buttons: Update data and Cancel to the Rating
 			 -->
+			<div class="mb-3">
+				<label for="moodysRating" class="form-label">moodysRating</label>
+				<input type="text" name="moodysRating" class="form-control" id="moodysRating" placeholder="moodysRating" th:value="${rating.moodysRating}">
+			</div>
+			<div class="mb-3">
+				<label for="sandPRating" class="form-label">sandPRating</label>
+				<input type="text" name="sandPRating" class="form-control" id="sandPRating" placeholder="sandPRating" th:value="${rating.sandPRating}">
+			</div>
+			<div class="mb-3">
+				<label for="fitchRating" class="form-label">fitchRating</label>
+				<input type="text" name="fitchRating" class="form-control" id="fitchRating" placeholder="fitchRating" th:value="${rating.fitchRating}">
+			</div>
+			<div class="mb-3">
+				<label for="orderNumber" class="form-label">orderNumber</label>
+				<input type="text" name="orderNumber" class="form-control" id="orderNumber" placeholder="orderNumber" th:value="${rating.orderNumber}">
+			</div>
+			<button type="button" class="btn btn-primary">Cancel</button>
+			<button type="submit" class="btn btn-primary">Update Data</button>
 		</form>
 	</div>
-
 </div>
 </body>
 </html>

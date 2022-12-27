@@ -23,8 +23,10 @@ public class CurvePoint {
 
 	Timestamp asOfDate;
 
+	@NotNull(message = "must not be null")
 	double term;
 
+	@NotNull(message = "must not be null")
 	double value;
 
 	Timestamp creationDate;

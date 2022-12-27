@@ -18,7 +18,32 @@
 			<!--
 			TODO: Create a form to edit the values of RuleName, there are 2 buttons: Update data and Cancel to the RuleName
 			 -->
-
+			<div class="mb-3">
+				<label for="name" class="form-label">Name</label>
+				<input type="text" name="name" class="form-control" id="name" placeholder="name" th:value="${ruleName.name}">
+			</div>
+			<div class="mb-3">
+				<label for="description" class="form-label">Description</label>
+				<input type="text" name="description" class="form-control" id="description" placeholder="description" th:value="${ruleName.description}">
+			</div>
+			<div class="mb-3">
+				<label for="json" class="form-label">Json</label>
+				<input type="text" name="json" class="form-control" id="json" placeholder="json" th:value="${ruleName.json}">
+			</div>
+			<div class="mb-3">
+				<label for="template" class="form-label">Template</label>
+				<input type="text" name="template" class="form-control" id="template" placeholder="template" th:value="${ruleName.template}">
+			</div>
+			<div class="mb-3">
+				<label for="sqlStr" class="form-label">SqlStr</label>
+				<input type="text" name="sqlStr" class="form-control" id="sqlStr" placeholder="sqlStr" th:value="${ruleName.sqlStr}">
+			</div>
+			<div class="mb-3">
+				<label for="sqlPart" class="form-label">SqlPart</label>
+				<input type="text" name="sqlPart" class="form-control" id="sqlPart" placeholder="sqlPart" th:value="${ruleName.sqlPart}">
+			</div>
+			<button type="button" class="btn btn-primary">Cancel</button>
+			<button type="submit" class="btn btn-primary">Update data</button>
 		</form>
 	</div>
 

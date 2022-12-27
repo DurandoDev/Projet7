@@ -15,16 +15,22 @@ public class RuleName {
 	@Column(name = "id", nullable = false)
 	private Integer id;
 
+	@NotBlank(message = "Name is mandatory")
 	String name;
 
+	@NotBlank(message = "Description is mandatory")
 	String description;
 
+	@NotBlank(message = "Json is mandatory")
 	String json;
 
+	@NotBlank(message = "Template is mandatory")
 	String template;
 
+	@NotBlank(message = "SQLStr is mandatory")
 	String sqlStr;
 
+	@NotBlank(message = "SQLPart is mandatory")
 	String sqlPart;
 
 	public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {
