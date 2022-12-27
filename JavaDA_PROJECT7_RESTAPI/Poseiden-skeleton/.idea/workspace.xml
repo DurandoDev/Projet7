@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bfe57330-f434-4cda-9601-728d6817aae6" name="Changes" comment="logs and validation achieved" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="develop" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectId" id="2HiL2TJ9L1DFaJJ0D42MTTmOTZg" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Pong" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.23472223" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunManager" selected="Spring Boot.Application">
+    <configuration name="BidTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-boot-skeleton" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.nnk.springboot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.nnk.springboot" />
+      <option name="MAIN_CLASS_NAME" value="com.nnk.springboot.BidTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="spring-boot-skeleton" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.nnk.springboot.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.BidTests" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bfe57330-f434-4cda-9601-728d6817aae6" name="Changes" comment="" />
+      <created>1668762751061</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1668762751061</updated>
+      <workItem from="1668762752354" duration="163000" />
+      <workItem from="1668762926733" duration="2501000" />
+      <workItem from="1669020289590" duration="2402000" />
+      <workItem from="1669109949468" duration="641000" />
+      <workItem from="1669192201965" duration="608000" />
+      <workItem from="1669279354338" duration="2125000" />
+      <workItem from="1669365587920" duration="1346000" />
+      <workItem from="1669625232856" duration="2569000" />
+      <workItem from="1669712433005" duration="1194000" />
+      <workItem from="1669797759789" duration="3486000" />
+      <workItem from="1669969014520" duration="2594000" />
+      <workItem from="1669972856464" duration="282000" />
+      <workItem from="1669973157074" duration="700000" />
+      <workItem from="1669973927081" duration="6867000" />
+      <workItem from="1670229780524" duration="1210000" />
+      <workItem from="1670316108376" duration="604000" />
+      <workItem from="1670404284878" duration="1356000" />
+      <workItem from="1670488766241" duration="1263000" />
+      <workItem from="1670574982077" duration="6341000" />
+      <workItem from="1670835749842" duration="1791000" />
+      <workItem from="1670922889594" duration="4234000" />
+      <workItem from="1671007214982" duration="3471000" />
+      <workItem from="1671093158802" duration="3582000" />
+      <workItem from="1671120138646" duration="23000" />
+      <workItem from="1671179048652" duration="3064000" />
+      <workItem from="1671439905470" duration="5835000" />
+      <workItem from="1671462396624" duration="908000" />
+      <workItem from="1671528675380" duration="5177000" />
+      <workItem from="1671611214932" duration="4822000" />
+      <workItem from="1671634231705" duration="1737000" />
+      <workItem from="1671697853422" duration="1225000" />
+      <workItem from="1671702779878" duration="7522000" />
+      <workItem from="1671783797079" duration="8211000" />
+      <workItem from="1671884065627" duration="598000" />
+      <workItem from="1672080397270" duration="686000" />
+      <workItem from="1672129870267" duration="4863000" />
+    </task>
+    <task id="LOCAL-00001" summary="fix vcs">
+      <created>1669974094286</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1669974094286</updated>
+    </task>
+    <task id="LOCAL-00002" summary="html pages completed">
+      <created>1671709970388</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1671709970388</updated>
+    </task>
+    <task id="LOCAL-00003" summary="logs and validation achieved">
+      <created>1672139232552</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1672139232552</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+    </ignored-roots>
+    <MESSAGE value="fix vcs" />
+    <MESSAGE value="html pages completed" />
+    <MESSAGE value="logs and validation achieved" />
+    <option name="LAST_COMMIT_MESSAGE" value="logs and validation achieved" />
+  </component>
+</project>

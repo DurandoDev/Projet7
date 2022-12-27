@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a334d354-fbc0-472b-880e-6268fa889154" name="Changes" comment="model and controller update">
+      <change beforePath="$PROJECT_DIR$/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/resources/templates/bidList/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/resources/templates/bidList/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/target/classes/templates/bidList/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/target/classes/templates/bidList/add.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$/JavaDA_PROJECT7_RESTAPI" source="master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/JavaDA_PROJECT7_RESTAPI" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="d8a27254-30a5-409e-93b2-820a2fc7089f" />
+        <option name="url" value="https://github.com/OpenClassrooms-Student-Center/JavaDA_PROJECT7_RESTAPI.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectId" id="2Gl3VRVq8R7Ge8Yz8QMHmKzzKb8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RunManager" selected="JUnit.BidTests">
+    <configuration name="BidTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-boot-skeleton" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.nnk.springboot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.nnk.springboot" />
+      <option name="MAIN_CLASS_NAME" value="com.nnk.springboot.BidTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BidTests.bidListTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-boot-skeleton" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.nnk.springboot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.nnk.springboot" />
+      <option name="MAIN_CLASS_NAME" value="com.nnk.springboot.BidTests" />
+      <option name="METHOD_NAME" value="bidListTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="spring-boot-skeleton" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.nnk.springboot.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.BidTests" />
+        <item itemvalue="JUnit.BidTests.bidListTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a334d354-fbc0-472b-880e-6268fa889154" name="Changes" comment="" />
+      <created>1666949367873</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1666949367873</updated>
+      <workItem from="1666949369344" duration="665000" />
+      <workItem from="1666950645071" duration="1847000" />
+      <workItem from="1667205179069" duration="8947000" />
+      <workItem from="1667377579863" duration="6381000" />
+      <workItem from="1667464700555" duration="9100000" />
+      <workItem from="1667550558877" duration="1641000" />
+      <workItem from="1667553485852" duration="5273000" />
+      <workItem from="1667810283473" duration="4557000" />
+      <workItem from="1667898391646" duration="3850000" />
+      <workItem from="1667982616936" duration="3182000" />
+      <workItem from="1668069531249" duration="1231000" />
+      <workItem from="1668155109187" duration="4573000" />
+      <workItem from="1668418433685" duration="2115000" />
+      <workItem from="1668500949876" duration="4518000" />
+      <workItem from="1668511182828" duration="651000" />
+      <workItem from="1668587313746" duration="1835000" />
+      <workItem from="1668674252363" duration="5870000" />
+      <workItem from="1668759842115" duration="655000" />
+      <workItem from="1668760607136" duration="729000" />
+      <workItem from="1668762679286" duration="67000" />
+    </task>
+    <task id="LOCAL-00001" summary="test">
+      <created>1666951625578</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1666951625578</updated>
+    </task>
+    <task id="LOCAL-00002" summary="model and controller update">
+      <created>1668158612197</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1668158612197</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test" />
+    <MESSAGE value="model and controller update" />
+    <option name="LAST_COMMIT_MESSAGE" value="model and controller update" />
+  </component>
+</project>
