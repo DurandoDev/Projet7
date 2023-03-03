@@ -1,7 +1,7 @@
 package com.nnk.springboot.domain;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
+
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;

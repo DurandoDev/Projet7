@@ -10,11 +10,12 @@
 <div class="container">
 
 	<div class="row">
-		<h1>Add Bid Screen</h1>
+		<h1 style="color: white">Add Bid Screen</h1>
 	</div>
 	<div class="row">
-		<h2>Add New Bid</h2>
+		<h2 style="color: white">Add New Bid</h2>
 	</div>
+	<button type="button" class="btn btn-danger" th:href="@{/user/login}">Logout</button>
 
 	<div class="row">
 		<form action="#" th:action="@{/bidList/validate}" th:object="${bidList}" method="post" class="container">

@@ -1,0 +1,16 @@
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+}
+
+.card {
+    width: 350px;
+}
+
+#fullname, #username, #password {
+    width: 100%;
+}
+

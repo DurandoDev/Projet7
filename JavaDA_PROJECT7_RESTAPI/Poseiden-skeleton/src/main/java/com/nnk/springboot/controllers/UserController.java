@@ -1,11 +1,13 @@
 package com.nnk.springboot.controllers;
 
+import com.nnk.springboot.domain.Role;
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.repositories.RoleRepository;
 import com.nnk.springboot.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +24,12 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private PasswordEncoder encoder;
+
     private static final Logger logger = LoggerFactory.getLogger(BidListController.class);
 
     @RequestMapping("/user/list")
@@ -32,28 +40,33 @@ public class UserController {
         return "user/list";
     }
 
+    @GetMapping("/login")
+    public String login(){
+        logger.info("Login page");
+        return "user/login";
+    }
+
     @GetMapping("/user/add")
-    public String addUser(User bid) {
+    public String showUserForm(User bid) {
         logger.info("addUser() method called");
         return "user/add";
     }
 
-    @PostMapping("/user/validate")
-    public String validate(@Valid User user, BindingResult result, Model model) {
-        if (!result.hasErrors()) {
-//            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//            user.setPassword(encoder.encode(user.getPassword()));
-            userRepository.save(user);
-            model.addAttribute("users", userRepository.findAll());
-            logger.info("Validation failed for user: {}", user);
-            return "redirect:/user/list";
+    @PostMapping("/user/add")
+    public String addUser(@Valid User user, BindingResult result) {
+        if (result.hasErrors()) {
+            return "user/add";
         }
-        logger.info("Validation succeeded for user: {}", user);
-        return "user/add";
+
+        user.setPassword(encoder.encode(user.getPassword()));
+        Role role = roleRepository.findByName("USER").orElse(new Role("USER"));
+        user.setRole(role);
+        userRepository.save(user);
+        return "redirect:/login";
     }
 
     @GetMapping("/user/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+    public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         user.setPassword("");
         model.addAttribute("user", user);
@@ -79,7 +92,7 @@ public class UserController {
     }
 
     @GetMapping("/user/delete/{id}")
-    public String deleteUser(@PathVariable("id") Integer id, Model model) {
+    public String deleteUser(@PathVariable("id") Long id, Model model) {
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         userRepository.delete(user);
         model.addAttribute("users", userRepository.findAll());
