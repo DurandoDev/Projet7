@@ -1,6 +1,7 @@
 package com.nnk.springboot.config;
 
 import com.nnk.springboot.services.CustomOAuth2UserService;
+import com.nnk.springboot.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private CustomOAuth2UserService userService;
+
+	@Autowired
+	private RoleService roleService;
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -52,6 +56,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						.userService(userService)
 				.and()
 				.defaultSuccessUrl("/bidList/list",true);
+
+		roleService.createDefaultRoles();
+
 	}
 }
 

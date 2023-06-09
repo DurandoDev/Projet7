@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CurvePointTests.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">springboot in spring-boot-skeleton Coverage Results</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot</a> &gt; <span class="el_source">CurvePointTests.java</span></div><h1>CurvePointTests.java</h1><pre class="source lang-java linenums">package com.nnk.springboot;
+
+import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.domain.Role;
+import com.nnk.springboot.domain.User;
+import com.nnk.springboot.repositories.CurvePointRepository;
+import com.nnk.springboot.repositories.RoleRepository;
+import com.nnk.springboot.repositories.UserRepository;
+import org.junit.Assert;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(classes = Application.class)
+@AutoConfigureMockMvc
+<span class="fc" id="L37">public class CurvePointTests {</span>
+
+	@Autowired
+	private CurvePointRepository curvePointRepository;
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Autowired
+	private WebApplicationContext webApplicationContext;
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private RoleRepository roleRepository;
+
+<span class="fc" id="L54">	User u = new User();</span>
+<span class="fc" id="L55">	Role role =new Role();</span>
+
+	@BeforeEach
+	public void setup() throws Exception {
+<span class="fc" id="L59">		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();</span>
+
+<span class="fc" id="L61">		role.setName(&quot;USER&quot;);</span>
+
+<span class="fc" id="L63">		u.setFullname(&quot;toto&quot;);</span>
+<span class="fc" id="L64">		u.setUsername(&quot;testuser&quot;);</span>
+<span class="fc" id="L65">		u.setPassword(&quot;testPassword&quot;);</span>
+
+<span class="fc" id="L67">		u.setRole(role);</span>
+
+<span class="fc" id="L69">		roleRepository.save(role);</span>
+<span class="fc" id="L70">		userRepository.save(u);</span>
+<span class="fc" id="L71">	}</span>
+
+	@AfterEach
+	public void deleteSetup() throws Exception {
+<span class="fc" id="L75">		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();</span>
+
+<span class="fc" id="L77">		roleRepository.delete(role);</span>
+<span class="fc" id="L78">		userRepository.delete(u);</span>
+<span class="fc" id="L79">	}</span>
+
+//	@Test
+//	public void curvePointTest() {
+//		CurvePoint curvePoint = new CurvePoint(10, 10d, 30d);
+//
+//		// Save
+//		curvePoint = curvePointRepository.save(curvePoint);
+//		Assert.assertNotNull(curvePoint.getId());
+//		Assert.assertTrue(curvePoint.getCurveId() == 10);
+//
+//		// Update
+//		curvePoint.setCurveId(20);
+//		curvePoint = curvePointRepository.save(curvePoint);
+//		Assert.assertTrue(curvePoint.getCurveId() == 20);
+//
+//		// Find
+//		List&lt;CurvePoint&gt; listResult = curvePointRepository.findAll();
+//		Assert.assertTrue(listResult.size() &gt; 0);
+//
+//		// Delete
+//		Integer id = curvePoint.getId();
+//		curvePointRepository.delete(curvePoint);
+//		Optional&lt;CurvePoint&gt; curvePointList = curvePointRepository.findById(id);
+//		Assert.assertFalse(curvePointList.isPresent());
+//	}
+
+	@Test
+	@WithMockUser(username = &quot;testuser&quot;)
+	public void curvePointAddTest() throws Exception{
+<span class="fc" id="L109">		mockMvc.perform(post(&quot;/curvePoint/validate&quot;)</span>
+<span class="fc" id="L110">						.param(&quot;curveId&quot;, &quot;42&quot;)</span>
+<span class="fc" id="L111">						.param(&quot;term&quot;, &quot;15&quot;)</span>
+<span class="fc" id="L112">						.param(&quot;value&quot;, &quot;10&quot;))</span>
+<span class="fc" id="L113">				.andExpect(redirectedUrl(&quot;/curvePoint/list&quot;)).andExpect(status().isFound());</span>
+<span class="fc" id="L114">	}</span>
+
+	@Test
+	@WithMockUser(username = &quot;testuser&quot;)
+	public void curvePointUpdateTest() throws Exception{
+<span class="fc" id="L119">		mockMvc.perform(post(&quot;/curvePoint/update/{id}&quot;, 12)</span>
+<span class="fc" id="L120">						.param(&quot;curveId&quot;, &quot;42&quot;)</span>
+<span class="fc" id="L121">						.param(&quot;term&quot;, &quot;16&quot;)</span>
+<span class="fc" id="L122">						.param(&quot;value&quot;, &quot;11&quot;))</span>
+<span class="fc" id="L123">				.andExpect(redirectedUrl(&quot;/curvePoint/list&quot;)).andExpect(status().isFound());</span>
+<span class="fc" id="L124">	}</span>
+
+	@Test
+	@WithMockUser(username = &quot;testuser&quot;)
+	public void curvePointDeleteTest() throws Exception{
+<span class="fc" id="L129">		CurvePoint curvePoint = new CurvePoint(28, 15, 10d);</span>
+<span class="fc" id="L130">		curvePoint = curvePointRepository.save(curvePoint);</span>
+<span class="fc" id="L131">		mockMvc.perform(get(&quot;/curvePoint/delete/{id}&quot;, curvePoint.getId()))</span>
+<span class="fc" id="L132">				.andExpect(redirectedUrl(&quot;/curvePoint/list&quot;)).andExpect(status().isFound());</span>
+<span class="fc" id="L133">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BidTests.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">springboot in spring-boot-skeleton Coverage Results</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot</a> &gt; <span class="el_source">BidTests.java</span></div><h1>BidTests.java</h1><pre class="source lang-java linenums">package com.nnk.springboot;
+
+import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.domain.Role;
+import com.nnk.springboot.domain.User;
+import com.nnk.springboot.repositories.BidListRepository;
+import com.nnk.springboot.repositories.RoleRepository;
+import com.nnk.springboot.repositories.UserRepository;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(classes = Application.class)
+@AutoConfigureMockMvc
+<span class="fc" id="L31">public class BidTests {</span>
+
+	@Autowired
+	private BidListRepository bidListRepository;
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Autowired
+	private WebApplicationContext webApplicationContext;
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private RoleRepository roleRepository;
+
+<span class="fc" id="L48">	User u = new User();</span>
+<span class="fc" id="L49">	Role role =new Role();</span>
+
+	@BeforeEach
+	public void setup() throws Exception {
+<span class="fc" id="L53">		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();</span>
+
+<span class="fc" id="L55">		role.setName(&quot;USER&quot;);</span>
+
+<span class="fc" id="L57">		u.setFullname(&quot;toto&quot;);</span>
+<span class="fc" id="L58">		u.setUsername(&quot;testuser&quot;);</span>
+<span class="fc" id="L59">		u.setPassword(&quot;testPassword&quot;);</span>
+
+<span class="fc" id="L61">		u.setRole(role);</span>
+
+<span class="fc" id="L63">		roleRepository.save(role);</span>
+<span class="fc" id="L64">		userRepository.save(u);</span>
+<span class="fc" id="L65">	}</span>
+
+	@AfterEach
+	public void deleteSetup() throws Exception {
+<span class="fc" id="L69">		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();</span>
+
+<span class="fc" id="L71">		roleRepository.delete(role);</span>
+<span class="fc" id="L72">		userRepository.delete(u);</span>
+<span class="fc" id="L73">	}</span>
+
+//	@Test
+//	@WithMockUser(username = &quot;testuser&quot;, password = &quot;testPassword&quot;, roles = &quot;USER&quot;)
+//	public void bidListTest() {
+//		BidList bid = new BidList(&quot;Account Test&quot;, &quot;Type Test&quot;, 10d);
+//
+//		// Save
+//		bid = bidListRepository.save(bid);
+//		Assert.assertNotNull(bid.getBidListId());
+//		Assert.assertEquals(bid.getBidQuantity(), 10d, 10d);
+//
+//		// Update
+//		bid.setBidQuantity(20d);
+//		bid = bidListRepository.save(bid);
+//		Assert.assertEquals(bid.getBidQuantity(), 20d, 20d);
+//
+//		// Find
+//		List&lt;BidList&gt; listResult = bidListRepository.findAll();
+//		Assert.assertTrue(listResult.size() &gt; 0);
+//
+//		// Delete
+//		Integer id = bid.getBidListId();
+//		bidListRepository.delete(bid);
+//		Optional&lt;BidList&gt; bidList = bidListRepository.findById(id);
+//		Assert.assertFalse(bidList.isPresent());
+//	}
+
+	@Test
+	@WithMockUser(username = &quot;testuser&quot;)
+	public void bidAddTest() throws Exception{
+<span class="fc" id="L104">		mockMvc.perform(post(&quot;/bidList/validate&quot;)</span>
+<span class="fc" id="L105">				.param(&quot;account&quot;, &quot;Account Test&quot;)</span>
+<span class="fc" id="L106">				.param(&quot;type&quot;, &quot;Type test&quot;)</span>
+<span class="fc" id="L107">				.param(&quot;bidQuantity&quot;, &quot;10&quot;))</span>
+<span class="fc" id="L108">				.andExpect(redirectedUrl(&quot;/bidList/list&quot;)).andExpect(status().isFound());</span>
+<span class="fc" id="L109">	}</span>
+
+	@Test
+	@WithMockUser(username = &quot;testuser&quot;)
+	public void bidUpdateTest() throws Exception{
+<span class="fc" id="L114">		mockMvc.perform(post(&quot;/bidList/update/{id}&quot;, 12)</span>
+<span class="fc" id="L115">						.param(&quot;account&quot;, &quot;Account Test&quot;)</span>
+<span class="fc" id="L116">						.param(&quot;type&quot;, &quot;Type test&quot;)</span>
+<span class="fc" id="L117">						.param(&quot;bidQuantity&quot;, &quot;20&quot;))</span>
+<span class="fc" id="L118">				.andExpect(redirectedUrl(&quot;/bidList/list&quot;)).andExpect(status().isFound());</span>
+<span class="fc" id="L119">	}</span>
+
+	@Test
+	@WithMockUser(username = &quot;testuser&quot;)
+	public void bidDeleteTest() throws Exception{
+<span class="fc" id="L124">		BidList bid = new BidList(&quot;Account Test&quot;, &quot;Type Test&quot;, 10d);</span>
+<span class="fc" id="L125">		bid = bidListRepository.save(bid);</span>
+<span class="fc" id="L126">		mockMvc.perform(get(&quot;/bidList/delete/{id}&quot;, bid.getBidListId()))</span>
+<span class="fc" id="L127">				.andExpect(redirectedUrl(&quot;/bidList/list&quot;)).andExpect(status().isFound());</span>
+<span class="fc" id="L128">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

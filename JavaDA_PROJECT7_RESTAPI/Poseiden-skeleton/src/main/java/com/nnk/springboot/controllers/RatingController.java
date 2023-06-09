@@ -1,10 +1,7 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

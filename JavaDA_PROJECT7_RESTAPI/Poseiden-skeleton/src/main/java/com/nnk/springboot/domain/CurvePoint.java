@@ -39,10 +39,6 @@ public class CurvePoint {
 
 	}
 
-//	public int getCurveId() {return curveId;}
-//
-//	public void setCurveId(int id) {this.curveId = curveId;}
-
 	public Integer getId() {return id;}
 
 	public void setId(Integer id) {this.id = id;}

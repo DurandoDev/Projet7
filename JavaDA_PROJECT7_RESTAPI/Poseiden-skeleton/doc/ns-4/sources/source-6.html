@@ -1,0 +1,169 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > RuleName</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.nnk.springboot.domain</a>
+</div>
+
+<h1>Coverage Summary for Class: RuleName (com.nnk.springboot.domain)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RuleName</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/19)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">RuleName$HibernateProxy$8s5f6KnJ</td>
+  </tr>
+  <tr>
+    <td class="name">RuleName$HibernateProxy$nDLuEryv</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/19)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.nnk.springboot.domain;
+&nbsp;
+&nbsp;import lombok.Data;
+&nbsp;
+&nbsp;import javax.persistence.*;
+&nbsp;import javax.validation.constraints.NotBlank;
+&nbsp;import java.sql.Timestamp;
+&nbsp;
+&nbsp;@Entity
+<b class="fc">&nbsp;@Data</b>
+&nbsp;@Table(name = &quot;rulename&quot;)
+&nbsp;public class RuleName {
+&nbsp;
+&nbsp;	@Id
+&nbsp;	@GeneratedValue(strategy= GenerationType.AUTO)
+&nbsp;	@Column(name = &quot;id&quot;, nullable = false)
+&nbsp;	private Integer id;
+&nbsp;
+&nbsp;	@NotBlank(message = &quot;Name is mandatory&quot;)
+<b class="fc">&nbsp;	String name;</b>
+&nbsp;
+&nbsp;	@NotBlank(message = &quot;Description is mandatory&quot;)
+<b class="fc">&nbsp;	String description;</b>
+&nbsp;
+&nbsp;	@NotBlank(message = &quot;Json is mandatory&quot;)
+<b class="fc">&nbsp;	String json;</b>
+&nbsp;
+&nbsp;	@NotBlank(message = &quot;Template is mandatory&quot;)
+<b class="fc">&nbsp;	String template;</b>
+&nbsp;
+&nbsp;	@NotBlank(message = &quot;SQLStr is mandatory&quot;)
+<b class="fc">&nbsp;	String sqlStr;</b>
+&nbsp;
+&nbsp;	@NotBlank(message = &quot;SQLPart is mandatory&quot;)
+<b class="fc">&nbsp;	String sqlPart;</b>
+&nbsp;
+<b class="fc">&nbsp;	public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {</b>
+<b class="fc">&nbsp;		this.name = name;</b>
+<b class="fc">&nbsp;		this.description = description;</b>
+<b class="fc">&nbsp;		this.json = json;</b>
+<b class="fc">&nbsp;		this.template = template;</b>
+<b class="fc">&nbsp;		this.sqlStr = sqlStr;</b>
+<b class="fc">&nbsp;		this.sqlPart = sqlPart;</b>
+<b class="fc">&nbsp;	}</b>
+&nbsp;
+<b class="fc">&nbsp;	public RuleName() {</b>
+&nbsp;
+<b class="fc">&nbsp;	}</b>
+<b class="fc">&nbsp;	public Integer getId() {return id;}</b>
+&nbsp;
+<b class="fc">&nbsp;	public void setId(Integer id) {this.id = id;}</b>
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-06-09 10:54</div>
+</div>
+</body>
+</html>

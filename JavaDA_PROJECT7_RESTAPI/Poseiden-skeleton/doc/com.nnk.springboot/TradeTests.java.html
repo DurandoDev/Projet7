@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TradeTests.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">springboot in spring-boot-skeleton Coverage Results</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot</a> &gt; <span class="el_source">TradeTests.java</span></div><h1>TradeTests.java</h1><pre class="source lang-java linenums">package com.nnk.springboot;
+
+import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.domain.Role;
+import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.domain.User;
+import com.nnk.springboot.repositories.RoleRepository;
+import com.nnk.springboot.repositories.TradeRepository;
+import com.nnk.springboot.repositories.UserRepository;
+import org.junit.Assert;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(classes = Application.class)
+@AutoConfigureMockMvc
+<span class="fc" id="L37">public class TradeTests {</span>
+
+	@Autowired
+	private TradeRepository tradeRepository;
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Autowired
+	private WebApplicationContext webApplicationContext;
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private RoleRepository roleRepository;
+
+<span class="fc" id="L54">	User u = new User();</span>
+<span class="fc" id="L55">	Role role =new Role();</span>
+
+	@BeforeEach
+	public void setup() throws Exception {
+<span class="fc" id="L59">		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();</span>
+
+<span class="fc" id="L61">		role.setName(&quot;USER&quot;);</span>
+
+<span class="fc" id="L63">		u.setFullname(&quot;toto&quot;);</span>
+<span class="fc" id="L64">		u.setUsername(&quot;testuser&quot;);</span>
+<span class="fc" id="L65">		u.setPassword(&quot;testPassword&quot;);</span>
+
+<span class="fc" id="L67">		u.setRole(role);</span>
+
+<span class="fc" id="L69">		roleRepository.save(role);</span>
+<span class="fc" id="L70">		userRepository.save(u);</span>
+<span class="fc" id="L71">	}</span>
+
+	@AfterEach
+	public void deleteSetup() throws Exception {
+<span class="fc" id="L75">		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();</span>
+
+<span class="fc" id="L77">		roleRepository.delete(role);</span>
+<span class="fc" id="L78">		userRepository.delete(u);</span>
+<span class="fc" id="L79">	}</span>
+
+//	@Test
+//	public void tradeTest() {
+//		Trade trade = new Trade(&quot;Trade Account&quot;, &quot;Type&quot;);
+//
+//		// Save
+//		trade = tradeRepository.save(trade);
+//		Assert.assertNotNull(trade.getTradeId());
+//		Assert.assertTrue(trade.getAccount().equals(&quot;Trade Account&quot;));
+//
+//		// Update
+//		trade.setAccount(&quot;Trade Account Update&quot;);
+//		trade = tradeRepository.save(trade);
+//		Assert.assertTrue(trade.getAccount().equals(&quot;Trade Account Update&quot;));
+//
+//		// Find
+//		List&lt;Trade&gt; listResult = tradeRepository.findAll();
+//		Assert.assertTrue(listResult.size() &gt; 0);
+//
+//		// Delete
+//		Integer id = trade.getTradeId();
+//		tradeRepository.delete(trade);
+//		Optional&lt;Trade&gt; tradeList = tradeRepository.findById(id);
+//		Assert.assertFalse(tradeList.isPresent());
+//	}
+
+
+	@Test
+	@WithMockUser(username = &quot;testuser&quot;)
+	public void tradeAddTest() throws Exception{
+<span class="fc" id="L110">		mockMvc.perform(post(&quot;/trade/validate&quot;)</span>
+<span class="fc" id="L111">						.param(&quot;account&quot;, &quot;42&quot;)</span>
+<span class="fc" id="L112">						.param(&quot;type&quot;, &quot;15&quot;)</span>
+<span class="fc" id="L113">						.param(&quot;buyQuantity&quot;, &quot;10&quot;))</span>
+<span class="fc" id="L114">				.andExpect(redirectedUrl(&quot;/trade/list&quot;)).andExpect(status().isFound());</span>
+<span class="fc" id="L115">	}</span>
+
+	@Test
+	@WithMockUser(username = &quot;testuser&quot;)
+	public void tradeUpdateTest() throws Exception{
+<span class="fc" id="L120">		mockMvc.perform(post(&quot;/trade/update/{id}&quot;, 12)</span>
+<span class="fc" id="L121">						.param(&quot;account&quot;, &quot;42&quot;)</span>
+<span class="fc" id="L122">						.param(&quot;type&quot;, &quot;15&quot;)</span>
+<span class="fc" id="L123">						.param(&quot;buyQuantity&quot;, &quot;10&quot;))</span>
+<span class="fc" id="L124">				.andExpect(redirectedUrl(&quot;/trade/list&quot;)).andExpect(status().isFound());</span>
+<span class="fc" id="L125">	}</span>
+
+	@Test
+	@WithMockUser(username = &quot;testuser&quot;)
+	public void tradeDeleteTest() throws Exception{
+<span class="fc" id="L130">		Trade trade = new Trade(&quot;42&quot;,&quot;15&quot;,10d);</span>
+<span class="fc" id="L131">		trade = tradeRepository.save(trade);</span>
+<span class="fc" id="L132">		mockMvc.perform(get(&quot;/trade/delete/{id}&quot;, trade.getTradeId()))</span>
+<span class="fc" id="L133">				.andExpect(redirectedUrl(&quot;/trade/list&quot;)).andExpect(status().isFound());</span>
+<span class="fc" id="L134">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

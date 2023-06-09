@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RuleName.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">springboot in spring-boot-skeleton Coverage Results</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.domain</a> &gt; <span class="el_source">RuleName.java</span></div><h1>RuleName.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.domain;
+
+import lombok.Data;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.sql.Timestamp;
+
+@Entity
+<span class="pc bnc" id="L10" title="All 62 branches missed.">@Data</span>
+@Table(name = &quot;rulename&quot;)
+public class RuleName {
+
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
+	@Column(name = &quot;id&quot;, nullable = false)
+	private Integer id;
+
+	@NotBlank(message = &quot;Name is mandatory&quot;)
+<span class="fc" id="L20">	String name;</span>
+
+	@NotBlank(message = &quot;Description is mandatory&quot;)
+<span class="fc" id="L23">	String description;</span>
+
+	@NotBlank(message = &quot;Json is mandatory&quot;)
+<span class="fc" id="L26">	String json;</span>
+
+	@NotBlank(message = &quot;Template is mandatory&quot;)
+<span class="fc" id="L29">	String template;</span>
+
+	@NotBlank(message = &quot;SQLStr is mandatory&quot;)
+<span class="fc" id="L32">	String sqlStr;</span>
+
+	@NotBlank(message = &quot;SQLPart is mandatory&quot;)
+<span class="fc" id="L35">	String sqlPart;</span>
+
+<span class="fc" id="L37">	public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {</span>
+<span class="fc" id="L38">		this.name = name;</span>
+<span class="fc" id="L39">		this.description = description;</span>
+<span class="fc" id="L40">		this.json = json;</span>
+<span class="fc" id="L41">		this.template = template;</span>
+<span class="fc" id="L42">		this.sqlStr = sqlStr;</span>
+<span class="fc" id="L43">		this.sqlPart = sqlPart;</span>
+<span class="fc" id="L44">	}</span>
+
+<span class="fc" id="L46">	public RuleName() {</span>
+
+<span class="fc" id="L48">	}</span>
+<span class="fc" id="L49">	public Integer getId() {return id;}</span>
+
+<span class="fc" id="L51">	public void setId(Integer id) {this.id = id;}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

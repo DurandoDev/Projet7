@@ -1,0 +1,164 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Rating</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.nnk.springboot.domain</a>
+</div>
+
+<h1>Coverage Summary for Class: Rating (com.nnk.springboot.domain)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Rating</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Rating$HibernateProxy$4Q69I072</td>
+  </tr>
+  <tr>
+    <td class="name">Rating$HibernateProxy$jBAhbeIy</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.nnk.springboot.domain;
+&nbsp;
+&nbsp;import lombok.Data;
+&nbsp;
+&nbsp;import javax.persistence.*;
+&nbsp;import javax.validation.constraints.NotBlank;
+&nbsp;import javax.validation.constraints.NotEmpty;
+&nbsp;import javax.validation.constraints.NotNull;
+&nbsp;import java.sql.Timestamp;
+&nbsp;
+&nbsp;@Entity
+<b class="fc">&nbsp;@Data</b>
+&nbsp;@Table(name = &quot;rating&quot;)
+&nbsp;public class Rating {
+&nbsp;
+&nbsp;	@Id
+&nbsp;	@GeneratedValue(strategy= GenerationType.AUTO)
+&nbsp;	@Column(name = &quot;id&quot;, nullable = false)
+&nbsp;	private Integer id;
+&nbsp;
+&nbsp;	@NotBlank(message = &quot;Moodys Rating is mandatory&quot;)
+<b class="fc">&nbsp;	String moodysRating;</b>
+&nbsp;
+&nbsp;	@NotBlank(message = &quot;Sand PRating is mandatory&quot;)
+<b class="fc">&nbsp;	String sandPRating;</b>
+&nbsp;
+&nbsp;	@NotBlank(message = &quot;Fitch Rating is mandatory&quot;)
+<b class="fc">&nbsp;	String fitchRating;</b>
+&nbsp;
+&nbsp;	@NotNull(message = &quot;must not be null&quot;)
+<b class="fc">&nbsp;	Integer orderNumber;</b>
+&nbsp;
+<b class="fc">&nbsp;	public Rating(String moodysRating, String sandPRating, String fitchRating, int orderNumber) {</b>
+<b class="fc">&nbsp;		this.moodysRating = moodysRating;</b>
+<b class="fc">&nbsp;		this.sandPRating = sandPRating;</b>
+<b class="fc">&nbsp;		this.fitchRating = fitchRating;</b>
+<b class="fc">&nbsp;		this.orderNumber = orderNumber;</b>
+<b class="fc">&nbsp;	}</b>
+&nbsp;
+<b class="fc">&nbsp;	public Rating() {</b>
+&nbsp;
+<b class="fc">&nbsp;	}</b>
+&nbsp;
+<b class="fc">&nbsp;	public Integer getId() {return id;}</b>
+&nbsp;
+<b class="fc">&nbsp;	public void setId(Integer id) {this.id = id;}</b>
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-06-09 10:54</div>
+</div>
+</body>
+</html>

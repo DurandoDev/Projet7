@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RatingController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">springboot in spring-boot-skeleton Coverage Results</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.controllers</a> &gt; <span class="el_source">RatingController.java</span></div><h1>RatingController.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.controllers;
+
+import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.repositories.RatingRepository;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
+
+@Controller
+<span class="fc" id="L22">public class RatingController {</span>
+
+    @Autowired
+    RatingRepository ratingRepository;
+
+<span class="fc" id="L27">    private static final Logger logger = LoggerFactory.getLogger(RatingController.class);</span>
+
+    @RequestMapping(&quot;/rating/list&quot;)
+    public String home(Model model)
+    {
+<span class="nc" id="L32">        model.addAttribute(&quot;rating&quot;, ratingRepository.findAll());</span>
+<span class="nc" id="L33">        logger.info(&quot;Retrieved rating lists: {}&quot;, ratingRepository.findAll());</span>
+<span class="nc" id="L34">        return &quot;rating/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/rating/add&quot;)
+    public String addRatingForm(Rating rating) {
+<span class="nc" id="L39">        logger.info(&quot;addRatingForm() method called&quot;);</span>
+<span class="nc" id="L40">        return &quot;rating/add&quot;;</span>
+    }
+
+    @PostMapping(&quot;/rating/validate&quot;)
+    public String validate(@Valid Rating rating, BindingResult result, Model model) {
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="nc" id="L46">            logger.info(&quot;Validation failed for rating: {}&quot;, rating);</span>
+<span class="nc" id="L47">            return &quot;rating/add&quot;;</span>
+        }
+<span class="fc" id="L49">        ratingRepository.save(rating);</span>
+<span class="fc" id="L50">        logger.info(&quot;Validation succeeded for rating: {}&quot;, rating);</span>
+<span class="fc" id="L51">        model.addAttribute(&quot;message&quot;, &quot;Rating add successfully !&quot;);</span>
+<span class="fc" id="L52">        return &quot;redirect:/rating/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/rating/update/{id}&quot;)
+    public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+<span class="nc" id="L57">        Rating rating = ratingRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid rating Id:&quot; + id));</span>
+<span class="nc" id="L58">        model.addAttribute(&quot;rating&quot;, rating);</span>
+<span class="nc" id="L59">        logger.debug(&quot;Displaying update form for rating: {}&quot;, rating);</span>
+<span class="nc" id="L60">        return &quot;rating/update&quot;;</span>
+    }
+
+    @PostMapping(&quot;/rating/update/{id}&quot;)
+    public String updateRating(@PathVariable(&quot;id&quot;) Integer id, @Valid Rating rating,
+                             BindingResult result, Model model) {
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="nc" id="L67">            logger.info(&quot;Validation failed for rating: {}&quot;, rating);</span>
+<span class="nc" id="L68">            return &quot;rating/update&quot;;</span>
+        }
+
+<span class="fc" id="L71">        rating.setId(id);</span>
+<span class="fc" id="L72">        ratingRepository.save(rating);</span>
+<span class="fc" id="L73">        model.addAttribute(&quot;rating&quot;, ratingRepository.findAll());</span>
+<span class="fc" id="L74">        logger.info(&quot;Updated rating: {}&quot;, rating);</span>
+<span class="fc" id="L75">        return &quot;redirect:/rating/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/rating/delete/{id}&quot;)
+    public String deleteRating(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+<span class="pc" id="L80">        Rating rating = ratingRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid rating Id:&quot; + id));</span>
+<span class="fc" id="L81">        ratingRepository.delete(rating);</span>
+<span class="fc" id="L82">        model.addAttribute(&quot;rating&quot;, ratingRepository.findAll());</span>
+<span class="fc" id="L83">        logger.info(&quot;Deleted rating: {}&quot;, rating);</span>
+<span class="fc" id="L84">        return &quot;redirect:/rating/list&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

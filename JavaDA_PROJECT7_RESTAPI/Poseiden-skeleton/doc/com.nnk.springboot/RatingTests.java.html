@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RatingTests.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">springboot in spring-boot-skeleton Coverage Results</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot</a> &gt; <span class="el_source">RatingTests.java</span></div><h1>RatingTests.java</h1><pre class="source lang-java linenums">package com.nnk.springboot;
+
+import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.domain.Role;
+import com.nnk.springboot.domain.User;
+import com.nnk.springboot.repositories.RatingRepository;
+import com.nnk.springboot.repositories.RoleRepository;
+import com.nnk.springboot.repositories.UserRepository;
+import org.junit.Assert;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(classes = Application.class)
+@AutoConfigureMockMvc
+<span class="fc" id="L37">public class RatingTests {</span>
+
+	@Autowired
+	private RatingRepository ratingRepository;
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	@Autowired
+	private WebApplicationContext webApplicationContext;
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private RoleRepository roleRepository;
+
+<span class="fc" id="L54">	User u = new User();</span>
+<span class="fc" id="L55">	Role role =new Role();</span>
+
+	@BeforeEach
+	public void setup() throws Exception {
+<span class="fc" id="L59">		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();</span>
+
+<span class="fc" id="L61">		role.setName(&quot;USER&quot;);</span>
+
+<span class="fc" id="L63">		u.setFullname(&quot;toto&quot;);</span>
+<span class="fc" id="L64">		u.setUsername(&quot;testuser&quot;);</span>
+<span class="fc" id="L65">		u.setPassword(&quot;testPassword&quot;);</span>
+
+<span class="fc" id="L67">		u.setRole(role);</span>
+
+<span class="fc" id="L69">		roleRepository.save(role);</span>
+<span class="fc" id="L70">		userRepository.save(u);</span>
+<span class="fc" id="L71">	}</span>
+
+	@AfterEach
+	public void deleteSetup() throws Exception {
+<span class="fc" id="L75">		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();</span>
+
+<span class="fc" id="L77">		roleRepository.delete(role);</span>
+<span class="fc" id="L78">		userRepository.delete(u);</span>
+<span class="fc" id="L79">	}</span>
+
+//	@Test
+//	public void ratingTest() {
+//		Rating rating = new Rating(&quot;Moodys Rating&quot;, &quot;Sand PRating&quot;, &quot;Fitch Rating&quot;, 10);
+//
+//		// Save
+//		rating = ratingRepository.save(rating);
+//		Assert.assertNotNull(rating.getId());
+//		Assert.assertTrue(rating.getOrderNumber() == 10);
+//
+//		// Update
+//		rating.setOrderNumber(20);
+//		rating = ratingRepository.save(rating);
+//		Assert.assertTrue(rating.getOrderNumber() == 20);
+//
+//		// Find
+//		List&lt;Rating&gt; listResult = ratingRepository.findAll();
+//		Assert.assertTrue(listResult.size() &gt; 0);
+//
+//		// Delete
+//		Integer id = rating.getId();
+//		ratingRepository.delete(rating);
+//		Optional&lt;Rating&gt; ratingList = ratingRepository.findById(id);
+//		Assert.assertFalse(ratingList.isPresent());
+//	}
+
+	@Test
+	@WithMockUser(username = &quot;testuser&quot;)
+	public void ratingsAddTest() throws Exception{
+<span class="fc" id="L109">		mockMvc.perform(post(&quot;/rating/validate&quot;)</span>
+<span class="fc" id="L110">						.param(&quot;moodysRating&quot;, &quot;42&quot;)</span>
+<span class="fc" id="L111">						.param(&quot;sandPRating&quot;, &quot;15&quot;)</span>
+<span class="fc" id="L112">						.param(&quot;fitchRating&quot;, &quot;10&quot;)</span>
+<span class="fc" id="L113">						.param(&quot;orderNumber&quot;,&quot;3&quot;))</span>
+<span class="fc" id="L114">				.andExpect(redirectedUrl(&quot;/rating/list&quot;)).andExpect(status().isFound());</span>
+<span class="fc" id="L115">	}</span>
+
+	@Test
+	@WithMockUser(username = &quot;testuser&quot;)
+	public void ratingsUpdateTest() throws Exception{
+<span class="fc" id="L120">		mockMvc.perform(post(&quot;/rating/update/{id}&quot;, 12)</span>
+<span class="fc" id="L121">						.param(&quot;moodysRating&quot;, &quot;42&quot;)</span>
+<span class="fc" id="L122">						.param(&quot;sandPRating&quot;, &quot;15&quot;)</span>
+<span class="fc" id="L123">						.param(&quot;fitchRating&quot;, &quot;10&quot;)</span>
+<span class="fc" id="L124">						.param(&quot;orderNumber&quot;,&quot;3&quot;))</span>
+<span class="fc" id="L125">				.andExpect(redirectedUrl(&quot;/rating/list&quot;)).andExpect(status().isFound());</span>
+<span class="fc" id="L126">	}</span>
+
+	@Test
+	@WithMockUser(username = &quot;testuser&quot;)
+	public void ratingsDeleteTest() throws Exception{
+<span class="fc" id="L131">		Rating rating = new Rating(&quot;42&quot;, &quot;15&quot;,&quot;10&quot;, 3);</span>
+<span class="fc" id="L132">		rating = ratingRepository.save(rating);</span>
+<span class="fc" id="L133">		mockMvc.perform(get(&quot;/rating/delete/{id}&quot;, rating.getId()))</span>
+<span class="fc" id="L134">				.andExpect(redirectedUrl(&quot;/rating/list&quot;)).andExpect(status().isFound());</span>
+<span class="fc" id="L135">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

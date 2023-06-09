@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Trade.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">springboot in spring-boot-skeleton Coverage Results</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.domain</a> &gt; <span class="el_source">Trade.java</span></div><h1>Trade.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.domain;
+
+import lombok.Data;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
+
+
+@Entity
+<span class="pc bnc" id="L12" title="All 150 branches missed.">@Data</span>
+@Table(name = &quot;trade&quot;)
+public class Trade {
+
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
+	@Column(name = &quot;trade_id&quot;, nullable = false)
+	private Integer tradeId;
+
+	@NotBlank(message = &quot;Account is mandatory&quot;)
+<span class="fc" id="L22">	String account;</span>
+
+	@NotBlank(message = &quot;Type is mandatory&quot;)
+<span class="fc" id="L25">	String type;</span>
+
+	@NotNull(message = &quot;must not be null&quot;)
+<span class="fc" id="L28">	double buyQuantity;</span>
+
+<span class="fc" id="L30">	double sellQuantity;</span>
+
+<span class="fc" id="L32">	double buyPrice;</span>
+
+<span class="fc" id="L34">	double sellPrice;</span>
+
+<span class="fc" id="L36">	Timestamp tradeDate;</span>
+
+<span class="fc" id="L38">	String security;</span>
+
+<span class="fc" id="L40">	String status;</span>
+
+<span class="fc" id="L42">	String trader;</span>
+
+<span class="fc" id="L44">	String benchmark;</span>
+
+<span class="fc" id="L46">	String book;</span>
+
+<span class="fc" id="L48">	String creationName;</span>
+
+<span class="fc" id="L50">	Timestamp creationDate;</span>
+
+<span class="fc" id="L52">	String revisionName;</span>
+
+<span class="fc" id="L54">	Timestamp revisionDate;</span>
+
+<span class="fc" id="L56">	String dealName;</span>
+
+<span class="fc" id="L58">	String dealType;</span>
+
+<span class="fc" id="L60">	String sourceListId;</span>
+
+<span class="fc" id="L62">	String side;</span>
+
+<span class="fc" id="L64">	public Trade(String account, String type, double buyQuantity) {</span>
+<span class="fc" id="L65">		this.account = account;</span>
+<span class="fc" id="L66">		this.type = type;</span>
+<span class="fc" id="L67">		this.buyQuantity = buyQuantity;</span>
+<span class="fc" id="L68">	}</span>
+
+<span class="fc" id="L70">	public Trade() {</span>
+
+<span class="fc" id="L72">	}</span>
+
+<span class="fc" id="L74">	public Integer getTradeId() {return tradeId;}</span>
+
+<span class="fc" id="L76">	public void setTradeId(Integer tradeId) {this.tradeId = tradeId;}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

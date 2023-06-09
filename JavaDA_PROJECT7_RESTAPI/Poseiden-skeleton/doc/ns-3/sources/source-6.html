@@ -1,0 +1,198 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > RuleNameController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.nnk.springboot.controllers</a>
+</div>
+
+<h1>Coverage Summary for Class: RuleNameController (com.nnk.springboot.controllers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RuleNameController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62,5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    59,4%
+  </span>
+  <span class="absValue">
+    (19/32)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.nnk.springboot.controllers;
+&nbsp;
+&nbsp;import com.nnk.springboot.domain.RuleName;
+&nbsp;import com.nnk.springboot.repositories.RuleNameRepository;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Controller;
+&nbsp;import org.springframework.ui.Model;
+&nbsp;import org.springframework.validation.BindingResult;
+&nbsp;import org.springframework.web.bind.annotation.GetMapping;
+&nbsp;import org.springframework.web.bind.annotation.PathVariable;
+&nbsp;import org.springframework.web.bind.annotation.PostMapping;
+&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
+&nbsp;
+&nbsp;import javax.validation.Valid;
+&nbsp;
+&nbsp;@Controller
+<b class="fc">&nbsp;public class RuleNameController {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    RuleNameRepository ruleNameRepository;
+&nbsp;
+<b class="fc">&nbsp;    private static final Logger logger = LoggerFactory.getLogger(RuleNameController.class);</b>
+&nbsp;
+&nbsp;    @RequestMapping(&quot;/ruleName/list&quot;)
+&nbsp;    public String home(Model model)
+&nbsp;    {
+<b class="nc">&nbsp;        model.addAttribute(&quot;ruleName&quot;, ruleNameRepository.findAll());</b>
+<b class="nc">&nbsp;        logger.info(&quot;Retrieved ruleName lists: {}&quot;, ruleNameRepository.findAll());</b>
+<b class="nc">&nbsp;        return &quot;ruleName/list&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/ruleName/add&quot;)
+&nbsp;    public String addRuleForm(RuleName bid) {
+<b class="nc">&nbsp;        logger.info(&quot;addRuleForm() method called&quot;);</b>
+<b class="nc">&nbsp;        return &quot;ruleName/add&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @PostMapping(&quot;/ruleName/validate&quot;)
+&nbsp;    public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
+<b class="pc">&nbsp;        if (result.hasErrors()) {</b>
+<b class="nc">&nbsp;            logger.info(&quot;Validation failed for ruleName: {}&quot;, ruleName);</b>
+<b class="nc">&nbsp;            return &quot;ruleName/add&quot;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        ruleNameRepository.save(ruleName);</b>
+<b class="fc">&nbsp;        logger.info(&quot;Validation succeeded for ruleName: {}&quot;, ruleName);</b>
+<b class="fc">&nbsp;        model.addAttribute(&quot;message&quot;, &quot;RuleName add successfully !&quot;);</b>
+<b class="fc">&nbsp;        return &quot;redirect:/ruleName/list&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/ruleName/update/{id}&quot;)
+&nbsp;    public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+<b class="nc">&nbsp;        RuleName ruleName = ruleNameRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid ruleName Id:&quot; + id));</b>
+<b class="nc">&nbsp;        model.addAttribute(&quot;ruleName&quot;, ruleName);</b>
+<b class="nc">&nbsp;        logger.debug(&quot;Displaying update form for ruleName: {}&quot;, ruleName);</b>
+<b class="nc">&nbsp;        return &quot;ruleName/update&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @PostMapping(&quot;/ruleName/update/{id}&quot;)
+&nbsp;    public String updateRuleName(@PathVariable(&quot;id&quot;) Integer id, @Valid RuleName ruleName,
+&nbsp;                             BindingResult result, Model model) {
+<b class="pc">&nbsp;        if (result.hasErrors()) {</b>
+<b class="nc">&nbsp;            logger.info(&quot;Validation failed for ruleName: {}&quot;, ruleName);</b>
+<b class="nc">&nbsp;            return &quot;ruleName/update&quot;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        ruleName.setId(id);</b>
+<b class="fc">&nbsp;        ruleNameRepository.save(ruleName);</b>
+<b class="fc">&nbsp;        model.addAttribute(&quot;ruleName&quot;, ruleNameRepository.findAll());</b>
+<b class="fc">&nbsp;        logger.info(&quot;Validation succeeded for ruleName: {}&quot;, ruleName);</b>
+<b class="fc">&nbsp;        return &quot;redirect:/ruleName/list&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/ruleName/delete/{id}&quot;)
+&nbsp;    public String deleteRuleName(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+<b class="fc">&nbsp;        ruleNameRepository.findAll();</b>
+<b class="fc">&nbsp;        RuleName ruleName = ruleNameRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid ruleName Id:&quot; + id));</b>
+<b class="fc">&nbsp;        ruleNameRepository.delete(ruleName);</b>
+<b class="fc">&nbsp;        model.addAttribute(&quot;ruleName&quot;, ruleNameRepository.findAll());</b>
+<b class="fc">&nbsp;        logger.info(&quot;Deleted ruleName: {}&quot;, ruleName);</b>
+<b class="fc">&nbsp;        return &quot;redirect:/ruleName/list&quot;;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-06-09 10:54</div>
+</div>
+</body>
+</html>
