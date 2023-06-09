@@ -16,14 +16,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
-
-
 	@Autowired
 	private UserDetailsService userDetailsService;
 
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	private CustomOAuth2UserService userService;
@@ -41,24 +36,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/user/add").permitAll()
-				.antMatchers("/admin/*").authenticated()
-				.antMatchers("/user/*").authenticated()
-				.anyRequest().permitAll()
+				.antMatchers("/user/add","/login","/css/*").permitAll()
+				.anyRequest().authenticated()
 				.and()
 				.csrf().disable()
 				.formLogin()
 				.loginPage("/login")
-				.defaultSuccessUrl("/bidList/add",true)
+				.defaultSuccessUrl("/bidList/list",true)
 				.and()
-				.logout().logoutSuccessUrl("/login")
+				.logout().logoutUrl("/logout").logoutSuccessUrl("/login")
 				.and()
 				.oauth2Login()
 					.loginPage("/login")
 					.userInfoEndpoint()
 						.userService(userService)
 				.and()
-				.defaultSuccessUrl("/bidList/add",true);
+				.defaultSuccessUrl("/bidList/list",true);
 	}
 }
 

@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 public class RuleName {
 
 	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	@Column(name = "id", nullable = false)
 	private Integer id;
 
@@ -34,17 +35,19 @@ public class RuleName {
 	String sqlPart;
 
 	public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {
+		this.name = name;
+		this.description = description;
+		this.json = json;
+		this.template = template;
+		this.sqlStr = sqlStr;
+		this.sqlPart = sqlPart;
 	}
 
 	public RuleName() {
 
 	}
-
 	public Integer getId() {return id;}
 
 	public void setId(Integer id) {this.id = id;}
 
-	public Object getName() {return name;}
-
-	public void setName(String name) {this.name = name;}
 }

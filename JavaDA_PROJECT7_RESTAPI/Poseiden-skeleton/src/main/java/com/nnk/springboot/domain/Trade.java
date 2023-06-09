@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 public class Trade {
 
 	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	@Column(name = "trade_id", nullable = false)
 	private Integer tradeId;
 
@@ -26,13 +27,10 @@ public class Trade {
 	@NotNull(message = "must not be null")
 	double buyQuantity;
 
-	@NotNull(message = "must not be null")
 	double sellQuantity;
 
-	@NotNull(message = "must not be null")
 	double buyPrice;
 
-	@NotNull(message = "must not be null")
 	double sellPrice;
 
 	Timestamp tradeDate;
@@ -63,8 +61,10 @@ public class Trade {
 
 	String side;
 
-	public Trade(String tradeAccount, String type) {
-
+	public Trade(String account, String type, double buyQuantity) {
+		this.account = account;
+		this.type = type;
+		this.buyQuantity = buyQuantity;
 	}
 
 	public Trade() {

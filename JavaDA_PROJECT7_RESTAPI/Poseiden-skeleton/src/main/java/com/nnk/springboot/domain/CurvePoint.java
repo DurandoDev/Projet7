@@ -4,8 +4,6 @@ import lombok.Data;
 
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
@@ -16,32 +14,36 @@ import java.sql.Timestamp;
 public class CurvePoint {
 
 	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	@Column(name = "id", nullable = false)
 	private Integer id;
+
 	@NotNull(message = "must not be null")
 	private Integer curveId;
-
-	Timestamp asOfDate;
-
 	@NotNull(message = "must not be null")
 	double term;
-
 	@NotNull(message = "must not be null")
 	double value;
+
+	Timestamp asOfDate;
 
 	Timestamp creationDate;
 
 	public CurvePoint(int curveId, double term, double value) {
-
+		this.curveId = curveId;
+		this.term = term;
+		this.value = value;
 	}
 
 	public CurvePoint() {
 
 	}
 
-	public int getCurveId() {return curveId;}
-
-	public void setCurveId(int id) {this.curveId = curveId;}
+//	public int getCurveId() {return curveId;}
+//
+//	public void setCurveId(int id) {this.curveId = curveId;}
 
 	public Integer getId() {return id;}
+
+	public void setId(Integer id) {this.id = id;}
 }

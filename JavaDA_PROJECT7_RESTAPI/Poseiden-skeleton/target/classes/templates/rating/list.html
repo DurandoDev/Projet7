@@ -3,31 +3,50 @@
 	  xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8"/>
-<title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+<title>Rating List</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/css/addStyle.css}"/>
 </head>
 <body>
 <div class="container">
-	<div class="row">
-		<div class="col-6">
-			<a href="/bidList/list">Bid List</a>&nbsp;|&nbsp;
-			<a href="/curvePoint/list">Curve Points</a>&nbsp;|&nbsp;
-			<a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
-			<a href="/trade/list">Trade</a>&nbsp;|&nbsp;
-			<a href="/ruleName/list">Rule</a>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container-fluid">
+			<a class="navbar-brand">POSEIDON</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/bidList/list}">bidList</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/curvePoint/list}">CurvePoint</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" th:href="@{/rating/list}">Rating</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/trade/list}">Trade</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/ruleName/list}">Rule</a>
+					</li>
+				</ul>
+			</div>
 		</div>
-		<div class="col-6 text-right">
-			Logged in user: <b th:inline="text"  class="user"> [[${#httpServletRequest.remoteUser}]] </b>
-			<form th:action="@{/app-logout}" method="POST">
-				<input type="submit" value="Logout"/>
-			</form>
-		</div>
+	</nav>
+	<div class="col-6 text-right">
+		<b th:inline="text"  class="user">user: [[${#httpServletRequest.remoteUser}]] </b>
+		<form th:action="@{/logout}" method="post">
+			<button type="submit" class="btn btn-danger" id="logout">Logout</button>
+		</form>
 	</div>
 	<div class="row"><h2>Rating List</h2></div>
 	<div class="row">
-		<a href="/rating/add" class="btn btn-primary btn-sm">Add New</a>
+		<a th:href="@{/rating/add}" class="btn btn-primary btn-sm">Add New</a>
 		<table class="table table-bordered">
-			<thead>
+			<thead class="table-dark">
 				<tr>
 					<th>Id</th>
 					<th>MoodysRating</th>
@@ -38,16 +57,15 @@
 				</tr>
 			</thead>
 			<tbody>
-			<!-- TODO: Show all Rating to the table, the Action column will have Edit & Delete buttons -->
-			<tr th:each="rating : ${ratings}">
+			<tr th:each="rating : ${rating}">
 				<td th:text="${rating.id}"></td>
 				<td th:text="${rating.moodysRating}"></td>
 				<td th:text="${rating.sandPRating}"></td>
 				<td th:text="${rating.fitchRating}"></td>
 				<td th:text="${rating.orderNumber}"></td>
 				<td>
-					<a href="/rating/edit?id=[(${rating.id})]" class="btn btn-primary btn-sm">Edit</a>
-					<a href="/rating/delete?id=[(${rating.id})]" class="btn btn-primary btn-sm">Delete</a>
+					<a class="btn btn-danger" th:href="@{/rating/delete/{id}(id=${rating.id})}">Delete</a>
+					<a class="btn btn-primary" th:href="@{/rating/update/{id}(id=${rating.id})}">Edit</a>
 				</td>
 			</tbody>
 		</table>

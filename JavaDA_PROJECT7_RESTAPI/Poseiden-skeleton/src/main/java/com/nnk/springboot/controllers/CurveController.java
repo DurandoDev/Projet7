@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -32,19 +29,21 @@ public class CurveController {
     }
 
     @GetMapping("/curvePoint/add")
-    public String addBidForm(CurvePoint bid) {
-        logger.info("addBidForm() method called");
+    public String addcurvePointForm(CurvePoint bid) {
+        logger.info("addCurvePointForm() method called");
         return "curvePoint/add";
     }
 
     @PostMapping("/curvePoint/validate")
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
-        if (!result.hasErrors()) {
+        if (result.hasErrors()) {
             logger.info("Validation failed for curve point: {}", curvePoint);
-            return "redirect:/curvePoint/list";
+            return "curvePoint/add";
         }
+        curvePointRepository.save(curvePoint);
+        model.addAttribute("message", "CurvePoint add successfully !");
         logger.info("Validation succeeded for curve point: {}", curvePoint);
-        return "curvePoint/add";
+        return "redirect:/curvePoint/list";
     }
 
     @GetMapping("/curvePoint/update/{id}")
@@ -56,7 +55,7 @@ public class CurveController {
     }
 
     @PostMapping("/curvePoint/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
+    public String updateCurvePoint(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
                              BindingResult result, Model model) {
         if (result.hasErrors()) {
             logger.info("Validation failed for curve point: {}", curvePoint);
@@ -71,7 +70,8 @@ public class CurveController {
     }
 
     @GetMapping("/curvePoint/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id, Model model) {
+    public String deleteCurvePoint(@PathVariable("id") Integer id, Model model) {
+        curvePointRepository.findAll();
         CurvePoint curvePoint = curvePointRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid curvePoint Id:" + id));
         curvePointRepository.delete(curvePoint);
         model.addAttribute("curvePoint", curvePointRepository.findAll());

@@ -1,10 +1,7 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.repositories.RuleNameRepository;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +26,7 @@ public class RuleNameController {
     @RequestMapping("/ruleName/list")
     public String home(Model model)
     {
-        model.addAttribute("ruleNames", ruleNameRepository.findAll());
+        model.addAttribute("ruleName", ruleNameRepository.findAll());
         logger.info("Retrieved ruleName lists: {}", ruleNameRepository.findAll());
         return "ruleName/list";
     }
@@ -42,12 +39,14 @@ public class RuleNameController {
 
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
-        if (!result.hasErrors()) {
+        if (result.hasErrors()) {
             logger.info("Validation failed for ruleName: {}", ruleName);
-            return "redirect:/ruleName/list";
+            return "ruleName/add";
         }
+        ruleNameRepository.save(ruleName);
         logger.info("Validation succeeded for ruleName: {}", ruleName);
-        return "ruleName/add";
+        model.addAttribute("message", "RuleName add successfully !");
+        return "redirect:/ruleName/list";
     }
 
     @GetMapping("/ruleName/update/{id}")
@@ -74,6 +73,7 @@ public class RuleNameController {
 
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
+        ruleNameRepository.findAll();
         RuleName ruleName = ruleNameRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id:" + id));
         ruleNameRepository.delete(ruleName);
         model.addAttribute("ruleName", ruleNameRepository.findAll());

@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -42,13 +39,15 @@ public class BidListController {
 
 
     @PostMapping("/bidList/validate")
-    public String validate(@Valid BidList bid, BindingResult result, Model model) {
-        if (!result.hasErrors()) {
-            logger.info("Validation failed for bid: {}", bid);
-            return "redirect:/bidList/list";
+    public String validate(@Valid BidList bidList, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            logger.info("Validation failed for bid: {}", bidList);
+            return "bidList/add";
         }
-        logger.info("Validation succeeded for bid: {}", bid);
-        return "bidList/add";
+        bidListRepository.save(bidList);
+        logger.info("Validation succeeded for bid: {}", bidList);
+        model.addAttribute("message", "BidList add successfully !");
+        return "redirect:/bidList/list";
     }
 
 
@@ -56,7 +55,7 @@ public class BidListController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         BidList bidList = bidListRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid bid Id:" + id));
         logger.debug("Displaying update form for bid: {}", bidList);
-        model.addAttribute("bid", bidList);
+        model.addAttribute("bidList", bidList);
         return "bidList/update";
     }
 
@@ -77,10 +76,12 @@ public class BidListController {
 
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
+        bidListRepository.findAll();
         BidList bidList = bidListRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid bidList Id:" + id));
         bidListRepository.delete(bidList);
         model.addAttribute("bidList", bidListRepository.findAll());
         logger.info("Bid deleted successfully: {}", bidList);
         return "redirect:/bidList/list";
     }
+
 }

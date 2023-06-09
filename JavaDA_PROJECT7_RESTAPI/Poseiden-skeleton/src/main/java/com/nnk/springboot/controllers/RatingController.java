@@ -42,12 +42,14 @@ public class RatingController {
 
     @PostMapping("/rating/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
-        if (!result.hasErrors()) {
+        if (result.hasErrors()) {
             logger.info("Validation failed for rating: {}", rating);
-            return "redirect:/rating/list";
+            return "rating/add";
         }
+        ratingRepository.save(rating);
         logger.info("Validation succeeded for rating: {}", rating);
-        return "rating/add";
+        model.addAttribute("message", "Rating add successfully !");
+        return "redirect:/rating/list";
     }
 
     @GetMapping("/rating/update/{id}")

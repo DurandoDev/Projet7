@@ -7,7 +7,10 @@ import com.nnk.springboot.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
@@ -46,6 +51,21 @@ public class UserController {
         return "user/login";
     }
 
+    @PostMapping("/login")
+    public String goToLogin(){
+        logger.info("Login page");
+        return "user/login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/login?logout";
+    }
+
     @GetMapping("/user/add")
     public String showUserForm(User bid) {
         logger.info("addUser() method called");
@@ -55,12 +75,14 @@ public class UserController {
     @PostMapping("/user/add")
     public String addUser(@Valid User user, BindingResult result) {
         if (result.hasErrors()) {
+            logger.info("Validation failed for user: {}", user);
             return "user/add";
         }
 
         user.setPassword(encoder.encode(user.getPassword()));
         Role role = roleRepository.findByName("USER").orElse(new Role("USER"));
         user.setRole(role);
+        logger.info("Validation succeeded for user: {}", user);
         userRepository.save(user);
         return "redirect:/login";
     }

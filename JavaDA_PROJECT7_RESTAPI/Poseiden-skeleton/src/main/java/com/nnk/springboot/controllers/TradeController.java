@@ -42,12 +42,14 @@ public class TradeController {
 
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
-        if (!result.hasErrors()) {
+        if (result.hasErrors()) {
             logger.info("Validation failed for trade: {}", trade);
-            return "redirect:/trade/list";
+            return "trade/add";
         }
+        tradeRepository.save(trade);
         logger.info("Validation succeeded for trade: {}", trade);
-        return "trade/add";
+        model.addAttribute("message", "Trade add successfully !");
+        return "redirect:/trade/list";
     }
 
     @GetMapping("/trade/update/{id}")

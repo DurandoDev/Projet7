@@ -1,15 +1,11 @@
 package com.nnk.springboot.domain;
 
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.sql.Timestamp;
-import java.util.Date;
 
 @Entity
 @Data
@@ -17,6 +13,7 @@ import java.util.Date;
 public class BidList {
 
 	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	@Column(name = "bidListId", nullable = false)
 	private Integer bidListId;
 
@@ -62,7 +59,10 @@ public class BidList {
 
 	String side;
 
-	public BidList(String accountTest, String typeTest, double bid) {
+	public BidList(String account, String type, double bidQuantity) {
+		this.account = account;
+		this.type = type;
+		this.bidQuantity = bidQuantity;
 	}
 
 	public BidList() {

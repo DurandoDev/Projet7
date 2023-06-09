@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 public class Rating {
 
 	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	@Column(name = "id", nullable = false)
 	private Integer id;
 
@@ -30,6 +31,10 @@ public class Rating {
 	Integer orderNumber;
 
 	public Rating(String moodysRating, String sandPRating, String fitchRating, int orderNumber) {
+		this.moodysRating = moodysRating;
+		this.sandPRating = sandPRating;
+		this.fitchRating = fitchRating;
+		this.orderNumber = orderNumber;
 	}
 
 	public Rating() {
@@ -40,7 +45,4 @@ public class Rating {
 
 	public void setId(Integer id) {this.id = id;}
 
-	public int getOrderNumber() {return orderNumber;}
-
-	public void setOrderNumber(int orderNumber) {this.orderNumber = orderNumber;}
 }
