@@ -16,6 +16,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -58,50 +60,23 @@ public class RuleTests {
 	public void setup() throws Exception {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();
 
-		role.setName("USER");
-
 		u.setFullname("toto");
 		u.setUsername("testuser");
-		u.setPassword("testPassword");
 
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		u.setPassword(encoder.encode("testPassword"));
+
+		role = roleRepository.findByName("USER").get();
 		u.setRole(role);
 
-		roleRepository.save(role);
 		userRepository.save(u);
 	}
 
 	@AfterEach
 	public void deleteSetup() throws Exception {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();
-
-		roleRepository.delete(role);
-		userRepository.delete(u);
+		userRepository.deleteAll();
 	}
 
-//	@Test
-//	public void ruleTest() {
-//		RuleName rule = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
-//
-//		// Save
-//		rule = ruleNameRepository.save(rule);
-//		Assert.assertNotNull(rule.getId());
-//		Assert.assertTrue(rule.getName().equals("Rule Name"));
-//
-//		// Update
-//		rule.setName("Rule Name Update");
-//		rule = ruleNameRepository.save(rule);
-//		Assert.assertTrue(rule.getName().equals("Rule Name Update"));
-//
-//		// Find
-//		List<RuleName> listResult = ruleNameRepository.findAll();
-//		Assert.assertTrue(listResult.size() > 0);
-//
-//		// Delete
-//		Integer id = rule.getId();
-//		ruleNameRepository.delete(rule);
-//		Optional<RuleName> ruleList = ruleNameRepository.findById(id);
-//		Assert.assertFalse(ruleList.isPresent());
-//	}
 
 	@Test
 	@WithMockUser(username = "testuser")

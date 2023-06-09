@@ -16,6 +16,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -58,50 +60,23 @@ public class RatingTests {
 	public void setup() throws Exception {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();
 
-		role.setName("USER");
-
 		u.setFullname("toto");
 		u.setUsername("testuser");
-		u.setPassword("testPassword");
 
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		u.setPassword(encoder.encode("testPassword"));
+
+		role = roleRepository.findByName("USER").get();
 		u.setRole(role);
 
-		roleRepository.save(role);
 		userRepository.save(u);
 	}
 
 	@AfterEach
 	public void deleteSetup() throws Exception {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();
-
-		roleRepository.delete(role);
-		userRepository.delete(u);
+		userRepository.deleteAll();
 	}
 
-//	@Test
-//	public void ratingTest() {
-//		Rating rating = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
-//
-//		// Save
-//		rating = ratingRepository.save(rating);
-//		Assert.assertNotNull(rating.getId());
-//		Assert.assertTrue(rating.getOrderNumber() == 10);
-//
-//		// Update
-//		rating.setOrderNumber(20);
-//		rating = ratingRepository.save(rating);
-//		Assert.assertTrue(rating.getOrderNumber() == 20);
-//
-//		// Find
-//		List<Rating> listResult = ratingRepository.findAll();
-//		Assert.assertTrue(listResult.size() > 0);
-//
-//		// Delete
-//		Integer id = rating.getId();
-//		ratingRepository.delete(rating);
-//		Optional<Rating> ratingList = ratingRepository.findById(id);
-//		Assert.assertFalse(ratingList.isPresent());
-//	}
 
 	@Test
 	@WithMockUser(username = "testuser")

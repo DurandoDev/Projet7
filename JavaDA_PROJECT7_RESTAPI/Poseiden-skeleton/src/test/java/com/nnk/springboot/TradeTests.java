@@ -16,6 +16,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -58,50 +60,22 @@ public class TradeTests {
 	public void setup() throws Exception {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();
 
-		role.setName("USER");
-
 		u.setFullname("toto");
 		u.setUsername("testuser");
-		u.setPassword("testPassword");
 
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		u.setPassword(encoder.encode("testPassword"));
+
+		role = roleRepository.findByName("USER").get();
 		u.setRole(role);
 
-		roleRepository.save(role);
 		userRepository.save(u);
 	}
 
 	@AfterEach
 	public void deleteSetup() throws Exception {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();
-
-		roleRepository.delete(role);
-		userRepository.delete(u);
+		userRepository.deleteAll();
 	}
-
-//	@Test
-//	public void tradeTest() {
-//		Trade trade = new Trade("Trade Account", "Type");
-//
-//		// Save
-//		trade = tradeRepository.save(trade);
-//		Assert.assertNotNull(trade.getTradeId());
-//		Assert.assertTrue(trade.getAccount().equals("Trade Account"));
-//
-//		// Update
-//		trade.setAccount("Trade Account Update");
-//		trade = tradeRepository.save(trade);
-//		Assert.assertTrue(trade.getAccount().equals("Trade Account Update"));
-//
-//		// Find
-//		List<Trade> listResult = tradeRepository.findAll();
-//		Assert.assertTrue(listResult.size() > 0);
-//
-//		// Delete
-//		Integer id = trade.getTradeId();
-//		tradeRepository.delete(trade);
-//		Optional<Trade> tradeList = tradeRepository.findById(id);
-//		Assert.assertFalse(tradeList.isPresent());
-//	}
 
 
 	@Test

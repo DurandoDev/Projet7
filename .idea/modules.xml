@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Projet 7.iml" filepath="$PROJECT_DIR$/.idea/Projet 7.iml" />
-      <module fileurl="file://$PROJECT_DIR$/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/spring-boot-skeleton.iml" filepath="$PROJECT_DIR$/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/spring-boot-skeleton.iml" />
     </modules>
   </component>
 </project>

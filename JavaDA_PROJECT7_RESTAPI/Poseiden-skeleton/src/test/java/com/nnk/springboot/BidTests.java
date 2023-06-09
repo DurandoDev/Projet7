@@ -13,6 +13,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -52,51 +54,22 @@ public class BidTests {
 	public void setup() throws Exception {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();
 
-		role.setName("USER");
-
 		u.setFullname("toto");
 		u.setUsername("testuser");
-		u.setPassword("testPassword");
 
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		u.setPassword(encoder.encode("testPassword"));
+
+		role = roleRepository.findByName("USER").get();
 		u.setRole(role);
 
-		roleRepository.save(role);
 		userRepository.save(u);
 	}
 
 	@AfterEach
 	public void deleteSetup() throws Exception {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();
-
-		roleRepository.delete(role);
-		userRepository.delete(u);
+		userRepository.deleteAll();
 	}
-
-//	@Test
-//	@WithMockUser(username = "testuser", password = "testPassword", roles = "USER")
-//	public void bidListTest() {
-//		BidList bid = new BidList("Account Test", "Type Test", 10d);
-//
-//		// Save
-//		bid = bidListRepository.save(bid);
-//		Assert.assertNotNull(bid.getBidListId());
-//		Assert.assertEquals(bid.getBidQuantity(), 10d, 10d);
-//
-//		// Update
-//		bid.setBidQuantity(20d);
-//		bid = bidListRepository.save(bid);
-//		Assert.assertEquals(bid.getBidQuantity(), 20d, 20d);
-//
-//		// Find
-//		List<BidList> listResult = bidListRepository.findAll();
-//		Assert.assertTrue(listResult.size() > 0);
-//
-//		// Delete
-//		Integer id = bid.getBidListId();
-//		bidListRepository.delete(bid);
-//		Optional<BidList> bidList = bidListRepository.findById(id);
-//		Assert.assertFalse(bidList.isPresent());
-//	}
 
 	@Test
 	@WithMockUser(username = "testuser")

@@ -16,6 +16,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -58,50 +60,22 @@ public class CurvePointTests {
 	public void setup() throws Exception {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();
 
-		role.setName("USER");
-
 		u.setFullname("toto");
 		u.setUsername("testuser");
-		u.setPassword("testPassword");
 
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		u.setPassword(encoder.encode("testPassword"));
+
+		role = roleRepository.findByName("USER").get();
 		u.setRole(role);
 
-		roleRepository.save(role);
 		userRepository.save(u);
 	}
 
 	@AfterEach
 	public void deleteSetup() throws Exception {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).apply(springSecurity()).build();
-
-		roleRepository.delete(role);
-		userRepository.delete(u);
+		userRepository.deleteAll();
 	}
-
-//	@Test
-//	public void curvePointTest() {
-//		CurvePoint curvePoint = new CurvePoint(10, 10d, 30d);
-//
-//		// Save
-//		curvePoint = curvePointRepository.save(curvePoint);
-//		Assert.assertNotNull(curvePoint.getId());
-//		Assert.assertTrue(curvePoint.getCurveId() == 10);
-//
-//		// Update
-//		curvePoint.setCurveId(20);
-//		curvePoint = curvePointRepository.save(curvePoint);
-//		Assert.assertTrue(curvePoint.getCurveId() == 20);
-//
-//		// Find
-//		List<CurvePoint> listResult = curvePointRepository.findAll();
-//		Assert.assertTrue(listResult.size() > 0);
-//
-//		// Delete
-//		Integer id = curvePoint.getId();
-//		curvePointRepository.delete(curvePoint);
-//		Optional<CurvePoint> curvePointList = curvePointRepository.findById(id);
-//		Assert.assertFalse(curvePointList.isPresent());
-//	}
 
 	@Test
 	@WithMockUser(username = "testuser")
