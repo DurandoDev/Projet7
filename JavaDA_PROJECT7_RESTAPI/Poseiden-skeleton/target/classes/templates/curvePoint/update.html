@@ -15,16 +15,16 @@
 		<div class="container">
 			<form action="#" th:action="@{/curvePoint/update/{id}(id=${curvePoint.id})}" th:object="${curvePoint}" method="post" class="form-horizontal">
 				<div class="form-group">
-					<label for="account">Curve Id</label>
-					<input type="text" name="account" class="form-control" id="account" th:value="${curvePoint.curveId}">
+					<label for="curveId">Curve Id</label>
+					<input type="text" name="curveId" class="form-control" id="curveId" th:value="${curvePoint.curveId}">
 				</div>
 				<div class="form-group">
-					<label for="type">Term</label>
-					<input type="text" name="type" class="form-control" id="type" th:value="${curvePoint.term}">
+					<label for="term">Term</label>
+					<input type="text" name="term" class="form-control" id="term" th:value="${curvePoint.term}">
 				</div>
 				<div class="form-group">
-					<label for="bidQuantity">Value</label>
-					<input type="text" name="bidQuantity" class="form-control" id="bidQuantity" th:value="${curvePoint.value}">
+					<label for="value">Value</label>
+					<input type="text" name="value" class="form-control" id="value" th:value="${curvePoint.value}">
 				</div>
 					<a class="btn btn-danger" th:href="@{/curvePoint/list}">Cancel</a>
 					<button type="submit" class="btn btn-primary">Update Curvepoint</button>

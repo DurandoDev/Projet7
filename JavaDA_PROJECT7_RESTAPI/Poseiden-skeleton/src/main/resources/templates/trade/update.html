@@ -27,18 +27,6 @@
 				<label for="buyQuantity" class="form-label">Buy Quantity</label>
 				<input type="text" name="buyQuantity" class="form-control" id="buyQuantity" th:value="${trade.buyQuantity}">
 			</div>
-			<div class="form-group">
-				<label for="sellQuantity" class="form-label">Sell Quantity</label>
-				<input type="text" name="sellQuantity" class="form-control" id="sellQuantity" th:value="${trade.sellQuantity}">
-			</div>
-			<div class="form-group">
-				<label for="buyPrice" class="form-label">Buy Price</label>
-				<input type="text" name="buyPrice" class="form-control" id="buyPrice" th:value="${trade.buyPrice}">
-			</div>
-			<div class="form-group">
-				<label for="sellPrice" class="form-label">Sell Price</label>
-				<input type="text" name="sellPrice" class="form-control" id="sellPrice" th:value="${trade.sellPrice}">
-			</div>
 			<a class="btn btn-danger" th:href="@{/trade/list}">Cancel</a>
 			<button type="submit" class="btn btn-primary">Update Trade</button>
 		</form>
